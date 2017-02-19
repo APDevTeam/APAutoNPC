@@ -1,0 +1,85 @@
+name: APAutoNPC
+main: apuni.npc.Main
+version: 1.2
+authors: [ForsakenUniverse, cccm5, Emily J. White]
+depend:  [Vault, Citizens]
+commands:
+   test:
+      description: null
+      usage: /<command>
+      permission: apautonpc.never.use.test.only
+   BBMerch:
+      description: Buys a building block merchant
+      usage: /<command>
+      permission: apautonpc.use
+   MineralMerch:
+      description: Buys a mineral merchant merchant
+      usage: /<command>
+      permission: apautonpc.use
+   ShipMerch:
+      description: Buys a ship supply merchant
+      usage: /<command>
+      permission: apautonpc.use
+   SmithMerch:
+      description: Buys a Blacksmith merchant
+      usage: /<command>
+      permission: apautonpc.use
+   FoodMerch:
+      description: Buys a foodstuffs merchant merchant
+      usage: /<command>
+      permission: apautonpc.use
+   BTMerchDisabled:
+      description: BarTender's are disabled
+      usage: /<command>
+      permission: apautonpc.disabled
+   BasicBrawler:
+      description: Buys a basic brawler
+      usage: /<command>
+      permission: apautonpc.use
+   AdvBrawler:
+      description: Buys a Advanced Brawler
+      usage: /<command>
+      permission: apautonpc.use
+   BasicArcher:
+      description: Buys a Basic Archer
+      usage: /<command>
+      permission: apautonpc.use
+   AdvArcher:
+      description: Buys a Advanced Archer
+      usage: /<command>
+      permission: apautonpc.use
+   BasicBlade:
+      description: Buys a Basic Bladesman
+      usage: /<command>
+      permission: apautonpc.use
+   BasicShort:
+      description: Buys a Basic Shortbow
+      usage: /<command>
+      permission: apautonpc.use
+   BasicArm:
+      description: Buys a Basic Armorer
+      usage: /<command>
+      permission: apautonpc.use
+   BasicLongbow:
+      description: Buys a Basic Longbow
+      usage: /<command>
+      permission: apautonpc.use
+   AdvBlade:
+      description: Buys a Advanced Bladesman
+      usage: /<command>
+      permission: apautonpc.use
+   AdvLongbow:
+      description: Buys a Advanced Longbow
+      usage: /<command>
+      permission: apautonpc.use
+   AdvShortbow:
+      description: Buys a Advanced Shortbow
+      usage: /<command>
+      permission: apautonpc.use
+   AdvArm:
+      description: Buys a Advanced Armorer
+      usage: /<command>
+      permission: apautonpc.use
+   AutoNPC:
+      description: Gives info on Airship Pirates NPC's
+      usage: /<command>
