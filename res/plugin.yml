@@ -28,6 +28,8 @@ commands:
       description: Buys a foodstuffs merchant merchant
       usage: /<command>
       permission: apautonpc.use
+   BTMerch:
+      description: BarTenders are disabled
       usage: /<command>
       permission: apautonpc.disabled
    BasicBrawler:
