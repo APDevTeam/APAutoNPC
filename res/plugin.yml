@@ -1,7 +1,7 @@
-name: APAutoNPC
-main: apuni.npc.Main
-version: 1.4
-authors: [ForsakenUniverse, cccm5, Emily J. White]
+name: apautonpc
+main: apuni.npc.main
+version: 1.0
+author: ForsakenUniverse,cccm5
 depend:  [Vault, Citizens]
 commands:
    test:
@@ -28,8 +28,8 @@ commands:
       description: Buys a foodstuffs merchant merchant
       usage: /<command>
       permission: apautonpc.use
-   BTMerch:
-      description: BarTenders are disabled
+   BTMerchDisabled:
+      description: BarTender's are disabled
       usage: /<command>
       permission: apautonpc.disabled
    BasicBrawler:
