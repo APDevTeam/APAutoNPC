@@ -1,0 +1,11 @@
+npcs:
+  Merchant:
+     id: 0
+     price: 10000
+     permNode: apautonpc.normal
+     regionType: airspace
+  Merchant0:
+     id: 4
+     price: 10000
+     permNode: apautonpc.normal
+     regionType: claim

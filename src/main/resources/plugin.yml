@@ -1,8 +1,8 @@
 name: APAutoNPC
-main: ap.autonpc.apdevteamuni
+main: ap.autonpc.apdevteamuni.APAutoNPC
 version: 2.0.1
 authors: [_MrUniverse, APDevTeam]
-depend: [WorldGuard, WorldEdit, Vault, Citizens, Sentinel]
+depend: [WorldGuard, WorldEdit, Vault, Citizens]
 commands: 
     autonpc:
         description: Spawns in a NPC
