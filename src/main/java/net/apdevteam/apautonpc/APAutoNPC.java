@@ -58,12 +58,12 @@ public class APAutoNPC extends JavaPlugin {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        final Player player = (Player)sender;
         if(!(sender instanceof Player)){
-            sender.sendMessage("You can only use this command from in the game!");
-            return true;
-
+            sender.sendMessage("You must be a player to use this command");
+            return false;
         }
+
+        Player player = (Player) sender;
         Location location = player.getLocation();
         RegionManager regionManager = ((WorldGuardPlugin)getServer().getPluginManager().getPlugin("WorldGuard")).getRegionManager(location.getWorld());
         ApplicableRegionSet set = regionManager.getApplicableRegions(location);
@@ -137,16 +137,4 @@ public class APAutoNPC extends JavaPlugin {
 
 
         return false;}
-
-
-
-
-
-
-
-
-
-
-
-
 }
