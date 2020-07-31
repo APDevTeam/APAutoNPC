@@ -92,10 +92,11 @@ public class APAutoNPC extends JavaPlugin {
     }
 
     public boolean takeBalance(Player player, int balance) {
-        if(economy.getBalance(player) > balance)
+        if(economy.getBalance(player) < balance)
             return false;
 
-        return economy.withdrawPlayer(player, balance).type == EconomyResponse.ResponseType.SUCCESS;
+        economy.withdrawPlayer(player, balance);
+        return true;
     }
 
     public NPC cloneNPC(int id, Location loc) {

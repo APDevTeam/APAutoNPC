@@ -1,11 +1,8 @@
 package net.apdevteam.apautonpc;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import net.citizensnpcs.api.CitizensAPI;
-import net.citizensnpcs.api.CitizensPlugin;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Owner;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,16 +17,19 @@ public class NPCCommand implements CommandExecutor {
         }
 
         if(!(sender instanceof Player)){
-            sender.sendMessage(APAutoNPC.PREFIX + "You must be a player to use this command");
+            sender.sendMessage(APAutoNPC.PREFIX + "You must be a player to use this command!");
             return true;
         }
         Player player = (Player) sender;
+        if(!player.hasPermission("apautonpc.use")) {
+            sender.sendMessage(APAutoNPC.PREFIX + "You do not have permission for this command!");
+            return true;
+        }
 
         if(args.length != 1) {
             sender.sendMessage(APAutoNPC.PREFIX + "Invalid usage, please type /AutoNPC help");
             return true;
         }
-
 
         if(args[0].equalsIgnoreCase("help")) {
             sender.sendMessage(APAutoNPC.PREFIX + "Use /AutoNPC <type> to get a merchant.");
