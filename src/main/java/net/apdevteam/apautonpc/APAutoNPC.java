@@ -1,4 +1,4 @@
-package ap.autonpc.apdevteamuni;
+package net.apdevteam.apautonpc;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,10 +26,10 @@ import net.milkbowl.vault.economy.Economy;
 
 
 public class APAutoNPC extends JavaPlugin {
-    private static Economy economy;
-    private static NPCRegistry registry;
-    public static final String Not_Enough_Money = ChatColor.DARK_AQUA + "You cannot afford this!!";
-    public static final String Successfull_Purchase = ChatColor.DARK_GRAY + "Congratulations on your new NPC!!";
+    private Economy economy;
+    private NPCRegistry registry;
+    public static final String Not_Enough_Money = ChatColor.DARK_AQUA + "You cannot afford this!";
+    public static final String Successfull_Purchase = ChatColor.DARK_GRAY + "Congratulations on your new NPC!";
     public static final int Merchant_Cost = 1000000;
     public static final int Basic_Brawl_Arch_Cost = 500000;
     public static final int Adv_Brawl_Arch_Cost = 1000000;
@@ -42,34 +42,15 @@ public class APAutoNPC extends JavaPlugin {
     HashMap<String, Integer> npcIDs = new HashMap<String, Integer>();
 
 
-
-
-
-
-
-
     public void onEnable() {
         economy = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
         registry = ((CitizensPlugin)CitizensAPI.getPlugin()).getNPCRegistry();
-        merchIDs.put("BBMerch",1471);
-        merchIDs.put("MineralMerch",1297);
-        merchIDs.put("FoodMerch",2058);
-        merchIDs.put("BSMerch",2057);
-        merchIDs.put("ShipMerch",1759);
-        merchIDs.put("BTMerch",1435);
-        npcIDs.put("AdvArmorer", 1999);
-        npcIDs.put("AdvLongbow", 1999);
-        npcIDs.put("BasicBrawl", 1651);
-        npcIDs.put("BasicArcher", 1747);
-        npcIDs.put("AdvBrawl", 1653);
-        npcIDs.put("AdvArcher", 1654);
-        npcIDs.put("BasicBlade", 1657);
-        npcIDs.put("BasicLongbow", 1659);
-        npcIDs.put("BasicShortbow", 1660);
-        npcIDs.put("AdvShortbow", 1662);
-        npcIDs.put("BasicArmorer", 1656);
-
-
+        merchIDs.put("BBMerch", 1471);
+        merchIDs.put("MineralMerch", 1297);
+        merchIDs.put("FoodMerch", 2058);
+        merchIDs.put("BSMerch", 2057);
+        merchIDs.put("ShipMerch", 1759);
+        merchIDs.put("BTMerch", 1435);
     }
 
     public void onDisable() {
