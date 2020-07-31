@@ -1,18 +1,15 @@
 package net.apdevteam.apautonpc;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.citizensnpcs.api.npc.NPC;
+import com.degitise.minevid.dtlTraders.utils.citizens.TraderTrait;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
@@ -22,6 +19,7 @@ import net.citizensnpcs.api.CitizensPlugin;
 import net.citizensnpcs.api.npc.NPCRegistry;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
+
 
 public class APAutoNPC extends JavaPlugin {
     public static final String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.AQUA + "APAutoNPC" + ChatColor.DARK_BLUE + "] " + ChatColor.GRAY;
@@ -64,8 +62,7 @@ public class APAutoNPC extends JavaPlugin {
 
 
         // TODO: Configure this somehow
-        merchIDs.put("minerals", 3323);
-        merchIDs.put("mineral", 3323);
+        merchIDs.put("minerals", 3209);
 
         this.getCommand("autonpc").setExecutor(new NPCCommand());
     }
@@ -102,8 +99,14 @@ public class APAutoNPC extends JavaPlugin {
     }
 
     public NPC cloneNPC(int id, Location loc) {
-        NPC npc = registry.getById(id).clone();
-        npc.teleport(loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
-        return npc;
+        NPC oldNPC = registry.getById(id);
+
+        NPC newNPC = oldNPC.clone();
+        newNPC.teleport(loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
+
+        String shopName = oldNPC.getTrait(TraderTrait.class).getGUIName();
+        newNPC.getTrait(TraderTrait.class).setGUIName(shopName);
+
+        return newNPC;
     }
 }

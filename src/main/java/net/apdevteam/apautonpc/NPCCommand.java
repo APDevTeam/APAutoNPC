@@ -20,18 +20,23 @@ public class NPCCommand implements CommandExecutor {
         }
 
         if(!(sender instanceof Player)){
-            sender.sendMessage("You must be a player to use this command");
-            return false;
+            sender.sendMessage(APAutoNPC.PREFIX + "You must be a player to use this command");
+            return true;
         }
         Player player = (Player) sender;
 
         if(args.length != 1) {
             sender.sendMessage(APAutoNPC.PREFIX + "Invalid usage, please type /AutoNPC help");
-            return false;
+            return true;
         }
 
 
         if(args[0].equalsIgnoreCase("help")) {
+            sender.sendMessage(APAutoNPC.PREFIX + "Use /AutoNPC <type> to get a merchant.");
+            sender.sendMessage(APAutoNPC.PREFIX + "Valid types:");
+            for(String s : APAutoNPC.getInstance().merchIDs.keySet()) {
+                sender.sendMessage(APAutoNPC.PREFIX + "  - " + s.toUpperCase());
+            }
             return true;
         }
 
@@ -39,23 +44,27 @@ public class NPCCommand implements CommandExecutor {
         int merchID = APAutoNPC.getInstance().getID(args[0]);
         if(merchID == -1) {
             sender.sendMessage(APAutoNPC.PREFIX + "That is not a valid NPC type, please type /AutoNPC help");
-            return false;
+            return true;
         }
 
         ProtectedRegion airspace = APAutoNPC.getInstance().isInAirspace(player.getLocation());
         if(airspace == null) {
             sender.sendMessage(APAutoNPC.PREFIX + "You must be in an airspace to use that command.");
+            return true;
         }
         else if(!APAutoNPC.getInstance().isOwner(airspace, player)) {
             sender.sendMessage(APAutoNPC.PREFIX + "You must be an airspace owner to use that command.");
+            return true;
         }
 
         if(!APAutoNPC.getInstance().takeBalance(player, 1000000)) {
             sender.sendMessage(APAutoNPC.PREFIX + "You cannot afford this!");
+            return true;
         }
 
         // Finally, clone NPC and notify player
         NPC npc = APAutoNPC.getInstance().cloneNPC(merchID, player.getLocation());
+
         npc.getTrait(Owner.class).setOwner(player);
         sender.sendMessage(APAutoNPC.PREFIX + "Congratulations on your new NPC!");
         return true;
