@@ -1,0 +1,11 @@
+name: APAutoNPC
+version: ${project.version}
+main: net.apdevteam.apautonpc.APAutoNPC
+api-version: 1.16
+authors: [TylerS1066, _MrUniverse, APDevTeam]
+depend: [WorldGuard, WorldEdit, Vault, Citizens]
+commands:
+  autonpc:
+    description: Spawns in a NPC
+    usage: /<command> <type>
+    permission: apautonpc.use
