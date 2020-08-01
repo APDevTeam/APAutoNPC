@@ -42,16 +42,19 @@ public class SellNPCCommand implements CommandExecutor {
             sender.sendMessage(APAutoNPC.PREFIX + "Please select an NPC to use that command.");
             return true;
         }
-        if(!selected.getTrait(Owner.class).isOwnedBy(player)) {
+
+        Owner ownedTrait = selected.getTrait(Owner.class);
+        if(ownedTrait.getOwnerId() != player.getUniqueId()) {
             sender.sendMessage(APAutoNPC.PREFIX + "You must own the selected NPC to use that command.");
             return true;
         }
 
-        APAutoNPC.getInstance().giveBalance(player, 1000000);
 
         // Finally, sell NPC and notify player
         selected.destroy();
+        APAutoNPC.getInstance().giveBalance(player, 1000000);
         sender.sendMessage(APAutoNPC.PREFIX + "Your NPC has been sold.");
+        APAutoNPC.getInstance().getLogger().info(player.getName() + " has sold NPC ID: " + selected.getId());
         return true;
     }
 }

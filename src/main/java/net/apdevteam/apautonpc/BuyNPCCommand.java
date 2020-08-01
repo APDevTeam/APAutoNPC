@@ -67,6 +67,7 @@ public class BuyNPCCommand implements CommandExecutor {
 
         npc.getTrait(Owner.class).setOwner(player);
         sender.sendMessage(APAutoNPC.PREFIX + "Congratulations on your new NPC!");
+        APAutoNPC.getInstance().getLogger().info(player.getName() + " has bought NPC ID: " + npc.getId());
         return true;
     }
 }
