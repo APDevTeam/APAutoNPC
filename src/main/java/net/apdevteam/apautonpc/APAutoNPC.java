@@ -64,6 +64,7 @@ public class APAutoNPC extends JavaPlugin {
         merchIDs.put("minerals", 3209);
 
         this.getCommand("buynpc").setExecutor(new BuyNPCCommand());
+        this.getCommand("sellnpc").setExecutor(new SellNPCCommand());
     }
 
     public void onDisable() {
@@ -98,6 +99,10 @@ public class APAutoNPC extends JavaPlugin {
         return true;
     }
 
+    public void giveBalance(Player player, int balance) {
+        economy.depositPlayer(player, balance);
+    }
+
     public NPC cloneNPC(int id, Location loc) {
         NPC oldNPC = registry.getById(id);
 
@@ -108,5 +113,9 @@ public class APAutoNPC extends JavaPlugin {
         newNPC.getTrait(TraderTrait.class).setGUIName(shopName);
 
         return newNPC;
+    }
+
+    public NPC getSelected(Player player) {
+        return CitizensAPI.getDefaultNPCSelector().getSelected(player);
     }
 }
