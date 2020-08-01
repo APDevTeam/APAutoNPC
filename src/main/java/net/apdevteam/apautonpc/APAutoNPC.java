@@ -8,7 +8,6 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.citizensnpcs.api.npc.NPC;
 import com.degitise.minevid.dtlTraders.utils.citizens.TraderTrait;
-import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -64,7 +63,7 @@ public class APAutoNPC extends JavaPlugin {
         // TODO: Configure this somehow
         merchIDs.put("minerals", 3209);
 
-        this.getCommand("autonpc").setExecutor(new NPCCommand());
+        this.getCommand("buynpc").setExecutor(new BuyNPCCommand());
     }
 
     public void onDisable() {

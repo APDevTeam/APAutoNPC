@@ -5,7 +5,11 @@ api-version: 1.16
 authors: [TylerS1066, _MrUniverse, APDevTeam]
 depend: [WorldGuard, WorldEdit, Vault, Citizens]
 commands:
-  autonpc:
-    description: Spawns in a NPC
-    usage: /<command> <type>
-    permission: apautonpc.use
+  buynpc:
+    description: Purchase a NPC
+    usage: /buynpc <type>
+    permission: apautonpc.buy
+  sellnpc:
+    description: Sell a NPC
+    usage: /sellnpc <type>
+    permission: apautonpc.sell

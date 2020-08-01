@@ -9,10 +9,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 
-public class NPCCommand implements CommandExecutor {
+public class BuyNPCCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args){
-        if(!cmd.getName().equalsIgnoreCase("AutoNPC")) {
+        if(!cmd.getName().equalsIgnoreCase("BuyNPC")) {
             return false;
         }
 
@@ -21,18 +21,18 @@ public class NPCCommand implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        if(!player.hasPermission("apautonpc.use")) {
+        if(!player.hasPermission("apautonpc.buy")) {
             sender.sendMessage(APAutoNPC.PREFIX + "You do not have permission for this command!");
             return true;
         }
 
         if(args.length != 1) {
-            sender.sendMessage(APAutoNPC.PREFIX + "Invalid usage, please type /AutoNPC help");
+            sender.sendMessage(APAutoNPC.PREFIX + "Invalid usage, please type /BuyNPC help");
             return true;
         }
 
         if(args[0].equalsIgnoreCase("help")) {
-            sender.sendMessage(APAutoNPC.PREFIX + "Use /AutoNPC <type> to get a merchant.");
+            sender.sendMessage(APAutoNPC.PREFIX + "Use /BuyNPC <type> to get a merchant.");
             sender.sendMessage(APAutoNPC.PREFIX + "Valid types:");
             for(String s : APAutoNPC.getInstance().merchIDs.keySet()) {
                 sender.sendMessage(APAutoNPC.PREFIX + "  - " + s.toUpperCase());
@@ -43,7 +43,7 @@ public class NPCCommand implements CommandExecutor {
 
         int merchID = APAutoNPC.getInstance().getID(args[0]);
         if(merchID == -1) {
-            sender.sendMessage(APAutoNPC.PREFIX + "That is not a valid NPC type, please type /AutoNPC help");
+            sender.sendMessage(APAutoNPC.PREFIX + "That is not a valid NPC type, please type /BuyNPC help");
             return true;
         }
 
