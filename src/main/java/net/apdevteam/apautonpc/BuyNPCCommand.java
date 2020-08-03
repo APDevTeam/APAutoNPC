@@ -9,6 +9,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
+
 import java.text.NumberFormat;
 
 
@@ -66,7 +68,7 @@ public class BuyNPCCommand implements CommandExecutor {
         }
 
         // Finally, clone NPC and notify player
-        NPC npc = APAutoNPC.getInstance().cloneNPC(merch.id, player.getLocation());
+        NPC npc = APAutoNPC.getInstance().cloneNPC(merch.id);
 
         if(npc == null) {
             sender.sendMessage(APAutoNPC.PREFIX + "Failed to copy NPC.  Please contact an administrator.");
@@ -76,6 +78,8 @@ public class BuyNPCCommand implements CommandExecutor {
         }
 
         npc.getTrait(Owner.class).setOwner(player);
+        npc.spawn(player.getLocation());
+        npc.teleport(player.getLocation(), PlayerTeleportEvent.TeleportCause.PLUGIN);
         sender.sendMessage(APAutoNPC.PREFIX + "Congratulations on your new NPC!");
         APAutoNPC.getInstance().getLogger().info(player.getName() + " has bought NPC ID: " + npc.getId());
         return true;

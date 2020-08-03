@@ -6,7 +6,7 @@
 
     <groupId>net.apdevteam.apautonpc</groupId>
     <artifactId>APAutoNPC</artifactId>
-    <version>3.2.15</version>
+    <version>3.2.22</version>
     <packaging>jar</packaging>
 
     <name>APAutoNPC</name>

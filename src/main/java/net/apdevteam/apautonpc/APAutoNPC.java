@@ -120,17 +120,17 @@ public class APAutoNPC extends JavaPlugin {
         economy.depositPlayer(player, balance);
     }
 
-    public NPC cloneNPC(int id, Location loc) {
+    public NPC cloneNPC(int id) {
         NPC oldNPC = registry.getById(id);
         if(oldNPC == null) {
             return null;
         }
 
         NPC newNPC = oldNPC.clone();
-        newNPC.teleport(loc, PlayerTeleportEvent.TeleportCause.PLUGIN);
 
         String shopName = oldNPC.getTrait(TraderTrait.class).getGUIName();
         newNPC.getTrait(TraderTrait.class).setGUIName(shopName);
+        newNPC.setName(oldNPC.getName());
 
         return newNPC;
     }
