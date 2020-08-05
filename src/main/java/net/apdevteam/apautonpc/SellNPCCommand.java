@@ -1,6 +1,8 @@
 package net.apdevteam.apautonpc;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import net.apdevteam.apautonpc.Config.Config;
+import net.apdevteam.apautonpc.Config.Merchant;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.trait.trait.Owner;
 import org.bukkit.Bukkit;
@@ -49,12 +51,17 @@ public class SellNPCCommand implements CommandExecutor {
             return true;
         }
 
+        Merchant type = Config.Merchants.get(selected.getName().replace(' ', '-').toUpperCase());
+        if(type == null) {
+            sender.sendMessage(APAutoNPC.PREFIX + "Unable to determine merchant type, please contact an administrator.");
+            return true;
+        }
+        APAutoNPC.getInstance().giveBalance(player, type.cost);
+        APAutoNPC.getInstance().getLogger().info(player.getName() + " has sold NPC ID: " + selected.getId() + " for: " + type.cost);
 
-        // Finally, sell NPC and notify player
+        // Finally, destroy the NPC and notify player
         selected.destroy();
-        APAutoNPC.getInstance().giveBalance(player, 1000000);
         sender.sendMessage(APAutoNPC.PREFIX + "Your NPC has been sold.");
-        APAutoNPC.getInstance().getLogger().info(player.getName() + " has sold NPC ID: " + selected.getId());
         return true;
     }
 }
