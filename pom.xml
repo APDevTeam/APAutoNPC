@@ -17,6 +17,7 @@
     </properties>
 
     <build>
+        <finalName>APAutoNPC</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -48,6 +49,13 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+            </resource>
+            <resource>
+                <targetPath>.</targetPath>
+                <directory>.</directory>
+                <includes>
+                    <include>LICENSE.md</include>
+                </includes>
             </resource>
         </resources>
     </build>
