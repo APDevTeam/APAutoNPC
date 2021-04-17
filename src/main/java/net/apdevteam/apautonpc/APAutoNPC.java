@@ -3,8 +3,11 @@ package net.apdevteam.apautonpc;
 import java.util.List;
 import java.util.Map;
 
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -93,11 +96,11 @@ public class APAutoNPC extends JavaPlugin {
     }
 
     public ProtectedRegion isInAirspace(Location loc) {
-        RegionManager regionManager = worldGuard.getRegionManager(loc.getWorld());
-        for(ProtectedRegion r : regionManager.getApplicableRegions(loc)) {
+        ApplicableRegionSet regions = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().getApplicableRegions(BukkitAdapter.adapt(loc));
+        for(ProtectedRegion r : regions.getRegions()) {
             if(r.getId().toLowerCase().contains("airspace")
-                    && r.getFlag(DefaultFlag.PVP) == StateFlag.State.DENY
-                    && r.getFlag(DefaultFlag.TNT) == StateFlag.State.DENY) {
+                    && r.getFlag(Flags.PVP) == StateFlag.State.DENY
+                    && r.getFlag(Flags.PVP) == StateFlag.State.DENY) {
                 return r;
             }
         }
