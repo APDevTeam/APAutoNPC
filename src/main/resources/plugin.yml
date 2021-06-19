@@ -1,7 +1,7 @@
 name: APAutoNPC
 version: ${project.version}
 main: net.apdevteam.apautonpc.APAutoNPC
-api-version: 1.16
+api-version: 1.14
 authors: [TylerS1066, _MrUniverse, APDevTeam]
 depend: [WorldGuard, WorldEdit, Vault, Citizens]
 commands:
