@@ -97,7 +97,7 @@ public class APAutoNPC extends JavaPlugin {
     }
 
     public @Nullable NPC cloneNPC(int id) {
-        NPCRegistry registry = RegistryWrapper.getRegistry();
+        NPCRegistry registry = RegistryWrapper.getInstance().getRegistry();
         if (registry == null)
             return null;
 
