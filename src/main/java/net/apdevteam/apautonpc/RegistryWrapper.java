@@ -35,7 +35,12 @@ public class RegistryWrapper implements Listener {
                 return;
             }
             registry = ((CitizensPlugin) test).getNPCRegistry();
-            APAutoNPC.getInstance().getLogger().info("Updated registry");
+            if (registry == null) {
+                APAutoNPC.getInstance().getLogger().info("Registry is null: " + CitizensAPI.hasImplementation());
+            }
+            else {
+                APAutoNPC.getInstance().getLogger().info("Updated registry");
+            }
         } catch (IllegalStateException e) {
             e.printStackTrace();
             APAutoNPC.getInstance().getLogger().info("Failed to get registry: " + CitizensAPI.hasImplementation());
