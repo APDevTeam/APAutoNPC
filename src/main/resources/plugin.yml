@@ -3,7 +3,7 @@ version: ${project.version}
 main: net.apdevteam.apautonpc.APAutoNPC
 api-version: 1.14
 authors: [TylerS1066, _MrUniverse, APDevTeam]
-depend: [WorldGuard, WorldEdit, Vault, Citizens]
+depend: [WorldGuard, WorldEdit, Vault, Citizens, dtlTraders]
 commands:
   buynpc:
     description: Purchase a NPC
