@@ -1,25 +1,18 @@
 package net.apdevteam.apautonpc;
 
-import java.util.List;
-import java.util.Map;
-
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import net.apdevteam.apautonpc.Config.Config;
 import net.apdevteam.apautonpc.Config.Merchant;
 import net.citizensnpcs.api.npc.NPC;
 import com.degitise.minevid.dtlTraders.utils.citizens.TraderTrait;
 import org.bukkit.Location;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.MemorySection;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import net.citizensnpcs.api.CitizensAPI;
@@ -30,14 +23,12 @@ import net.milkbowl.vault.economy.Economy;
 
 import javax.annotation.Nullable;
 
-
 public class APAutoNPC extends JavaPlugin {
-    public static final String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.AQUA + "APAutoNPC" + ChatColor.DARK_BLUE + "] " + ChatColor.GRAY;
+    public static final String PREFIX = ChatColor.DARK_BLUE + "[" + ChatColor.AQUA + "APAutoNPC" + ChatColor.DARK_BLUE
+            + "] " + ChatColor.GRAY;
 
     private static APAutoNPC instance;
     private Economy economy;
-    private NPCRegistry registry;
-    private WorldGuardPlugin worldGuard;
 
     public static APAutoNPC getInstance() {
         return instance;
@@ -48,7 +39,7 @@ public class APAutoNPC extends JavaPlugin {
 
         saveDefaultConfig();
         MemorySection merchants = (MemorySection) getConfig().get("Merchants");
-        for(String str : merchants.getKeys(false)) {
+        for (String str : merchants.getKeys(false)) {
             Merchant m = new Merchant();
             m.id = merchants.getConfigurationSection(str).getInt("id", -1);
             m.cost = merchants.getConfigurationSection(str).getDouble("cost", 1000000);
@@ -59,35 +50,15 @@ public class APAutoNPC extends JavaPlugin {
         }
 
         economy = getServer().getServicesManager().getRegistration(Economy.class).getProvider();
-        if(!(economy instanceof Economy)) {
+        if (!(economy instanceof Economy)) {
             getLogger().severe("Failed to load economy!");
             return;
         }
-        Plugin test = CitizensAPI.getPlugin();
-        if(!(test instanceof CitizensPlugin)) {
-            getLogger().severe("Failed to load Citizens!");
-            return;
-        }
-        registry = ((CitizensPlugin) test).getNPCRegistry();
-        if(!(registry instanceof NPCRegistry)) {
-            getLogger().severe("Failed to load NPC registry!");
-            return;
-        }
-        test = getServer().getPluginManager().getPlugin("WorldGuard");
-        if(!(test instanceof WorldGuardPlugin)) {
-            getLogger().severe("Failed to load WorldGuard!");
-            return;
-        }
-        worldGuard = (WorldGuardPlugin) test;
 
         getCommand("buynpc").setExecutor(new BuyNPCCommand());
         getCommand("sellnpc").setExecutor(new SellNPCCommand());
 
         getLogger().info("APAutoNPC " + getDescription().getVersion() + " has been enabled.");
-    }
-
-    public void onDisable() {
-
     }
 
     @Nullable
@@ -96,9 +67,10 @@ public class APAutoNPC extends JavaPlugin {
     }
 
     public ProtectedRegion isInAirspace(Location loc) {
-        ApplicableRegionSet regions = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().getApplicableRegions(BukkitAdapter.adapt(loc));
-        for(ProtectedRegion r : regions.getRegions()) {
-            if(r.getId().toLowerCase().contains("airspace")
+        ApplicableRegionSet regions = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery()
+                .getApplicableRegions(BukkitAdapter.adapt(loc));
+        for (ProtectedRegion r : regions.getRegions()) {
+            if (r.getId().toLowerCase().contains("airspace")
                     && r.getFlag(Flags.PVP) == StateFlag.State.DENY
                     && r.getFlag(Flags.PVP) == StateFlag.State.DENY) {
                 return r;
@@ -112,7 +84,7 @@ public class APAutoNPC extends JavaPlugin {
     }
 
     public boolean takeBalance(Player player, double balance) {
-        if(economy.getBalance(player) < balance)
+        if (economy.getBalance(player) < balance)
             return false;
 
         economy.withdrawPlayer(player, balance);
@@ -123,18 +95,29 @@ public class APAutoNPC extends JavaPlugin {
         economy.depositPlayer(player, balance);
     }
 
-    public NPC cloneNPC(int id) {
+    private @Nullable NPCRegistry getRegistry() {
+        Plugin test = CitizensAPI.getPlugin();
+        if (!(test instanceof CitizensPlugin)) {
+            getLogger().severe("Failed to load Citizens!");
+            return null;
+        }
+        return ((CitizensPlugin) test).getNPCRegistry();
+    }
+
+    public @Nullable NPC cloneNPC(int id) {
+        NPCRegistry registry = getRegistry();
+        if (registry == null)
+            return null;
+
         NPC oldNPC = registry.getById(id);
-        if(oldNPC == null) {
+        if (oldNPC == null) {
             return null;
         }
 
         NPC newNPC = oldNPC.clone();
-
         String shopName = oldNPC.getTrait(TraderTrait.class).getGUIName();
         newNPC.getTrait(TraderTrait.class).setGUIName(shopName);
         newNPC.setName(oldNPC.getName());
-
         return newNPC;
     }
 
