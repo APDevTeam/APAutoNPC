@@ -95,17 +95,8 @@ public class APAutoNPC extends JavaPlugin {
         economy.depositPlayer(player, balance);
     }
 
-    private @Nullable NPCRegistry getRegistry() {
-        Plugin test = CitizensAPI.getPlugin();
-        if (!(test instanceof CitizensPlugin)) {
-            getLogger().severe("Failed to load Citizens!");
-            return null;
-        }
-        return ((CitizensPlugin) test).getNPCRegistry();
-    }
-
     public @Nullable NPC cloneNPC(int id) {
-        NPCRegistry registry = getRegistry();
+        NPCRegistry registry = RegistryWrapper.getRegistry();
         if (registry == null)
             return null;
 
