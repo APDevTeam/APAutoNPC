@@ -57,6 +57,7 @@ public class APAutoNPC extends JavaPlugin {
 
         getCommand("buynpc").setExecutor(new BuyNPCCommand());
         getCommand("sellnpc").setExecutor(new SellNPCCommand());
+        getServer().getPluginManager().registerEvents(new RegistryWrapper(), this);
 
         getLogger().info("APAutoNPC " + getDescription().getVersion() + " has been enabled.");
     }
