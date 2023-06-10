@@ -24,6 +24,9 @@ public class RegistryWrapper implements Listener {
     private @Nullable NPCRegistry registry;
 
     public @Nullable NPCRegistry getRegistry() {
+        if (registry == null) {
+            updateRegistry();
+        }
         return registry;
     }
 
@@ -37,8 +40,7 @@ public class RegistryWrapper implements Listener {
             registry = ((CitizensPlugin) test).getNPCRegistry();
             if (registry == null) {
                 APAutoNPC.getInstance().getLogger().info("Registry is null: " + CitizensAPI.hasImplementation());
-            }
-            else {
+            } else {
                 APAutoNPC.getInstance().getLogger().info("Updated registry");
             }
         } catch (IllegalStateException e) {
