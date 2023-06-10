@@ -27,6 +27,7 @@ public class RegistryWrapper {
             }
             registry = ((CitizensPlugin) test).getNPCRegistry();
         } catch (IllegalStateException e) {
+            e.printStackTrace();
             APAutoNPC.getInstance().getLogger().info("Failed to get registry: " + CitizensAPI.hasImplementation());
         }
     }
