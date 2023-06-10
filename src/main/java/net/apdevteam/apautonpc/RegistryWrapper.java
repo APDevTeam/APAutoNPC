@@ -24,10 +24,6 @@ public class RegistryWrapper implements Listener {
     private @Nullable NPCRegistry registry;
 
     public @Nullable NPCRegistry getRegistry() {
-        if (registry == null) {
-            updateRegistry();
-        }
-
         return registry;
     }
 
