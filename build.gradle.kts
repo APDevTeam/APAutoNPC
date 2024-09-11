@@ -25,7 +25,7 @@ dependencies {
 }
 
 group = "net.apdevteam.apautonpc"
-version = "4.0.0_beta-2_gradle"
+version = "4.0.0_beta-3"
 description = "APAutoNPC"
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
