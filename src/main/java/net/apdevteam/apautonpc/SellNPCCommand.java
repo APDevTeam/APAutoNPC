@@ -45,8 +45,8 @@ public class SellNPCCommand implements CommandExecutor {
             return true;
         }
 
-        Owner ownedTrait = selected.getTrait(Owner.class);
-        if (!ownedTrait.getOwner().equalsIgnoreCase(player.getName()) || !ownedTrait.isOwnedBy(player)) {
+        Owner ownedTrait = selected.getTraitNullable(Owner.class);
+        if (ownedTrait == null || !ownedTrait.isOwnedBy(player)) {
             sender.sendMessage(APAutoNPC.PREFIX + "You must own the selected NPC to use that command.");
             return true;
         }

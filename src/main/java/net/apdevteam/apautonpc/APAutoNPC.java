@@ -71,7 +71,7 @@ public class APAutoNPC extends JavaPlugin {
         for (ProtectedRegion r : regions.getRegions()) {
             if (r.getId().toLowerCase().contains("airspace")
                     && r.getFlag(Flags.PVP) == StateFlag.State.DENY
-                    && r.getFlag(Flags.PVP) == StateFlag.State.DENY) {
+                    && r.getFlag(Flags.TNT) == StateFlag.State.DENY) {
                 return r;
             }
         }
