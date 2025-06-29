@@ -25,7 +25,7 @@ dependencies {
 }
 
 group = "net.apdevteam.apautonpc"
-version = "4.0.0_beta-3"
+version = "4.0.0_beta-4"
 description = "APAutoNPC"
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
